@@ -6,5 +6,6 @@
 
 module.exports = {
   /* Your site config here */
+  prefix: "/web_projects",
   plugins: [],
 }
