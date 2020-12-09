@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "module": "commonjs",
+        "strict": true,
+        "jsx": "preserve",
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "forceConsistentCasingInFileNames": true
+    },
+    "exclude": ["node_modules", "**/node_modules/*"]
+  }
