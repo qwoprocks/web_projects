@@ -1,14 +1,13 @@
 {
-  "name": "gatsby-starter-hello-world",
-  "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "name": "web_projects",
+  "private": false,
+  "description": "A website for my personal web projects",
   "version": "0.1.0",
-  "license": "0BSD",
+  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
@@ -24,16 +23,16 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.4",
+    "eslint": "^7.15.0",
     "gatsby-plugin-root-import": "^2.0.5",
     "gh-pages": "^3.1.0",
-    "prettier": "2.1.2",
     "typescript": "^4.1.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    "url": "https://github.com/qwoprocks/web_projects"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/qwoprocks/web_projects/issues"
   }
 }
