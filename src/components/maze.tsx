@@ -1,5 +1,5 @@
 import { Button } from "@material-ui/core"
-import { Pause, PlayArrow, Refresh } from "@material-ui/icons"
+import { Clear, Pause, PlayArrow, Refresh } from "@material-ui/icons"
 import React, { MouseEvent, MutableRefObject, useState, useEffect, useRef } from "react"
 import styled from "styled-components"
 
@@ -19,7 +19,16 @@ const CentralizedDiv = styled.div`
 `
 
 const StyledCanvas = styled.canvas`
+    background-color: white;
     border: 1px solid black;
+    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+`
+
+const ButtonContainer = styled.div`
+    margin: 0 auto;
+    width: ${MAZE_WIDTH - 5}px;
+    display: flex;
+    justify-content: space-between;
 `
 
 const Maze = () => {
@@ -56,7 +65,7 @@ const Maze = () => {
 
     const updateMaze = () => {
         let bufferGrid = Array.from(Array(NUM_COLS), () => new Array(NUM_ROWS))
-        let mazeGrid = mazeGridRef.current;
+        let mazeGrid = mazeGridRef.current
         for (let i = 0; i < NUM_COLS; i++) {
             for (let j = 0; j < NUM_ROWS; j++) {
                 let neighbours = [
@@ -104,7 +113,7 @@ const Maze = () => {
         if (canvasContext === undefined) {
             return
         }
-        canvasContext.lineWidth = LINE_WIDTH;
+        canvasContext.lineWidth = LINE_WIDTH
         // draw vertical lines
         for (let i = 0; i <= MAZE_WIDTH; i += CELL_SIZE) {
             canvasContext.moveTo(i, 0)
@@ -140,8 +149,9 @@ const Maze = () => {
         drawCellAt(i, j, mazeGridRef.current)
     }
     
-    const handleResetClick = () => {
-        setIsPlaying(false);
+    const handleResetClick = (event: React.MouseEvent) => {
+        event.preventDefault()
+        setIsPlaying(false)
         for (let i = 0; i < NUM_COLS; i++) {
             for (let j = 0; j < NUM_ROWS; j++) {
                 mazeGridRef.current[i][j] = false
@@ -151,23 +161,38 @@ const Maze = () => {
         drawGrid()
     }
 
-    const handlePlayPauseClick = () => {
+    const handleRandomizeClick = (event: React.MouseEvent) => {
+        event.preventDefault()
+        setIsPlaying(false);
+        clearCanvas()
+        drawGrid()
+        for (let i = 0; i < NUM_COLS; i++) {
+            for (let j = 0; j < NUM_ROWS; j++) {
+                mazeGridRef.current[i][j] = Math.random() > 0.5
+                drawCellAt(i, j, mazeGridRef.current)
+            }
+        }
+    }
+
+    const handlePlayPauseClick = (event: React.MouseEvent) => {
+        event.preventDefault()
         setIsPlaying(!isPlaying)
     }
 
     return (
         <CentralizedDiv>
             <StyledCanvas width={MAZE_WIDTH} height={MAZE_HEIGHT} ref={canvasRef} onClick={handleCellClick} />
-            <div>
-                <Button variant="contained" color="secondary" onClick={handleResetClick}>
-                    <Refresh />
-                    <span>Reset</span>
+            <ButtonContainer>
+                <Button variant="contained" color="secondary" startIcon={<Clear />} onClick={handleResetClick}>
+                    Reset
                 </Button>
-                <Button variant="contained" color="primary" onClick={handlePlayPauseClick}>
-                    {isPlaying ? <Pause /> : <PlayArrow />} 
-                    <span>{isPlaying ? "Pause" : "Play"}</span>
+                <Button variant="contained" color="primary" startIcon={isPlaying ? <Pause /> : <PlayArrow />} onClick={handlePlayPauseClick}>
+                    {isPlaying ? "Pause" : "Play"}
                 </Button>
-            </div>
+                <Button variant="contained" color="primary" startIcon={<Refresh />} onClick={handleRandomizeClick}>
+                    Randomize
+                </Button>
+            </ButtonContainer>
         </CentralizedDiv>
     )
 }
