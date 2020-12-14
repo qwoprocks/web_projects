@@ -21,7 +21,7 @@ const CentralizedDiv = styled.div`
 const StyledCanvas = styled.canvas`
     background-color: white;
     border: 1px solid black;
-    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 `
 
 const ButtonContainer = styled.div`
@@ -38,7 +38,7 @@ const Maze = () => {
     const mazeGridRef = useRef(Array.from(Array(NUM_COLS), () => new Array(NUM_ROWS)))
 
     const [isPlaying, setIsPlaying] = useState(false)
-    
+
     useEffect(() => {
         canvasContextRef.current = canvasRef.current.getContext("2d")!
         clearCanvas()
@@ -148,7 +148,7 @@ const Maze = () => {
         mazeGridRef.current[i][j] = !mazeGridRef.current[i][j]
         drawCellAt(i, j, mazeGridRef.current)
     }
-    
+
     const handleResetClick = (event: React.MouseEvent) => {
         event.preventDefault()
         setIsPlaying(false)
@@ -163,7 +163,7 @@ const Maze = () => {
 
     const handleRandomizeClick = (event: React.MouseEvent) => {
         event.preventDefault()
-        setIsPlaying(false);
+        setIsPlaying(false)
         clearCanvas()
         drawGrid()
         for (let i = 0; i < NUM_COLS; i++) {
